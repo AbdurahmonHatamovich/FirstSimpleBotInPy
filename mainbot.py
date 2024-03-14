@@ -3,6 +3,7 @@ import os
 from dotenv import load_dotenv
 from aiogram import Bot, Dispatcher, executor, types
 from main import Database
+from keyboards import menu_keyword,menu_detail,category_detail,menu_1
 
 load_dotenv()
 
@@ -25,13 +26,15 @@ async def send_welcome(message: types.Message):
 
     check_query = f"""SELECT * FROM users WHERE chat_id = '{chat_id}'"""
     if len(Database.connect(check_query, "select")) >= 1:
-        await message.reply(f"Hello @{username}")
+        print(f"{username}")
+        await message.answer(f"Hello @{username}",reply_markup=menu_keyword)
 
     else:
         print(f"{first_name} start bot")
         query = f"""INSERT INTO users(first_name, last_name, username, chat_id) VALUES('{first_name}', '{last_name}', '{username}', '{chat_id}')"""
         print(f"{username} {Database.connect(query, "insert")} database")
-        await message.reply(f"Hello @{username}")
+        print(f"{username}")
+        await message.answer(f"Hello @{username}",reply_markup=menu_keyword)
 
 
 # @dp.message_handler()
@@ -49,6 +52,27 @@ async def select(message: types.Message):
 
         First Name: {data[0][1]}
         Last Name: {data[0][2]}""")
+
+
+@dp.message_handler(lambda message: message.text == "Menu")
+async def show_menu(message: types.Message):
+    await message.answer("Menulardan birini tanglang ",reply_markup=menu_detail)
+
+@dp.message_handler(lambda message: message.text == "Category")
+async def show_category(message: types.Message):
+    await message.answer("Categorilardan birini tanlang ",reply_markup=category_detail)
+
+@dp.message_handler(lambda message: message.text == "Back to Menu")
+async def back(message: types.Message):
+    await message.answer("Menu yoki Categoriyani tanlang ",reply_markup=menu_keyword)
+
+@dp.message_handler(lambda message: message.text == "Menu 1")
+async def menu_01(message: types.Message):
+# action = button_callback_menu.new(action=message.text)
+    await message.answer ("Menu 1", reply_markup=menu_1)
+
+
+
 
 
 if __name__ == '__main__':
