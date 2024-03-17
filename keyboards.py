@@ -6,10 +6,9 @@ menu_keyword = ReplyKeyboardMarkup([
 [KeyboardButton("Malumot qidirish"), KeyboardButton("Biz haqimizda")]
 ],resize_keyboard=True)
 
-
 menu_detail = ReplyKeyboardMarkup([
-    [KeyboardButton("Menu 1"),KeyboardButton("Menu 2")],
-     [KeyboardButton("Menu 3"),KeyboardButton("Menu 4")],
+    [KeyboardButton("Menu- 1"),KeyboardButton("Menu - 2")],
+     [KeyboardButton("Menu - 3"),KeyboardButton("Menu - 4")],
     [KeyboardButton("Back to Menu")]
 ],resize_keyboard=True)
 
