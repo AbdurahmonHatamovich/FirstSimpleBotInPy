@@ -1,17 +1,19 @@
 from aiogram.types import ReplyKeyboardMarkup,KeyboardButton
 
-
 menu_keyword = ReplyKeyboardMarkup([
-    [KeyboardButton("Menu"), KeyboardButton("Category")],
-[KeyboardButton("Malumot qidirish"), KeyboardButton("Biz haqimizda")]
+    [KeyboardButton("O'zbek adabiyoti🌐"), KeyboardButton("Category💬")],
+[KeyboardButton('Aloqa📞'), KeyboardButton('Biz haqimizdaℹ️')]
 ],resize_keyboard=True)
 
 menu_detail = ReplyKeyboardMarkup([
-    [KeyboardButton("Menu- 1"),KeyboardButton("Menu - 2")],
-     [KeyboardButton("Menu - 3"),KeyboardButton("Menu - 4")],
+    [KeyboardButton("👤Abdulla Qodiriy"),KeyboardButton("👤Cho'lpon")],
+     [KeyboardButton("👤Oybek"),KeyboardButton("👤G'afur G'ulom")],
+     [KeyboardButton("👤Abdulla Qahhor"),KeyboardButton("👤Said Ahmad")],
+     [KeyboardButton("👤O'tkir Hoshimov"),KeyboardButton("👤Pirimqul Qodirov")],
+     [KeyboardButton("👤Asqad Muxtor"),KeyboardButton("👤Odil Yoqubov")],
+     [KeyboardButton("👤Tog'ay Murod"),KeyboardButton("👤Tohir Malik")],
     [KeyboardButton("Back to Menu")]
 ],resize_keyboard=True)
-
 
 category_detail = ReplyKeyboardMarkup([
     [KeyboardButton("Category - 1"),KeyboardButton("Category - 2")],
@@ -21,8 +23,8 @@ category_detail = ReplyKeyboardMarkup([
 
 
 menu_1 = ReplyKeyboardMarkup([
-    [KeyboardButton("1")],
-    [KeyboardButton("2")],
+    [KeyboardButton("Kitoblari 📚")],
+    [KeyboardButton("Hayoti va Ijodi⛓")],
 [KeyboardButton("Back to Menu")]
     ],resize_keyboard=True
 )

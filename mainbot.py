@@ -1,11 +1,10 @@
 import logging
 import os
 
-# import wikipedia
 from dotenv import load_dotenv
-from aiogram import Bot, Dispatcher, executor, types
+from aiogram import Bot, Dispatcher, types,executor
 from main import Database
-from keyboards import menu_keyword,menu_detail,category_detail,menu_1
+from keyboards import menu_keyword, menu_detail, menu_1
 from inline_keywords.post import inline_keyword_1
 load_dotenv()
 
@@ -18,7 +17,6 @@ logging.basicConfig(level=logging.INFO)
 bot = Bot(token=API_TOKEN)
 dp = Dispatcher(bot)
 
-
 @dp.message_handler(commands=['start', 'help'])
 async def send_welcome(message: types.Message):
     first_name = message.from_user.first_name
@@ -29,7 +27,7 @@ async def send_welcome(message: types.Message):
     check_query = f"""SELECT * FROM users WHERE chat_id = '{chat_id}'"""
     if len(Database.connect(check_query, "select")) >= 1:
         print(f"{username}")
-        await message.answer(f"Assalomu alekum @{username}  botimizga hush kelibsiz😊\n Malumot qidirish uchun iltimos sorov yuboring!!",reply_markup=menu_keyword)
+        await message.answer(f"Assalomu alekum @{username} botimizga hush kelibsiz😊\nMa'lumot izlamoqchi bo'lsangiz oddiygina bo'limlarda birini tanlashingiz mumkin☺️",reply_markup=menu_keyword)
 
 
     else:
@@ -57,39 +55,33 @@ async def send_welcome(message: types.Message):
 
 
 
-@dp.message_handler(lambda message: message.text == "Menu")
+@dp.message_handler(lambda message: message.text == "O'zbek adabiyoti🌐")
 async def show_menu(message: types.Message):
-    await message.answer("Menulardan birini tanglang ",reply_markup=menu_detail)
+    await message.answer("Mualifflardan birini tanlang ",reply_markup=menu_detail)
 
-@dp.message_handler(lambda message: message.text == "Category")
+@dp.message_handler(lambda message: message.text == "Category💬")
 async def show_category(message: types.Message):
     await message.answer("Categorilardan birini tanlang ",reply_markup=inline_keyword_1)
+
+@dp.message_handler(commands=['Aloqa📞'])
+async def show_contact(message: types.Message):
+    chat_id = message.chat.id
+    await bot.send_message(chat_id, "Taklif va shikoyatlar uchun @hwryubro 🔚 shu adminga murojaat qilishingiz mumkin")
+
+@dp.message_handler(commands=['Biz haqimizdaℹ️'])
+async def show_about(message: types.Message):
+    await message.answer("TELEFON: +998 90 917 78 50\nE-MAIL: muruvat@gmail.com\nISH VAQTI: du-yak 24/7\nMANZIL: 100187, Tоshkent shahar, Shayxontohur tumani, Navoiy ko'chasi, 2a")
+
+
 
 @dp.message_handler(lambda message: message.text == "Back to Menu")
 async def back(message: types.Message):
     await message.answer("Menu yoki Categoriyani tanlang ",reply_markup=menu_keyword)
 
-@dp.message_handler(lambda message: message.text == "Menu 1")
+@dp.message_handler(lambda message: message.text == "👤Abdulla Qodiriy")
 async def menu_01(message: types.Message):
 # action = button_callback_menu.new(action=message.text)
-    await message.answer ("Menu 1", reply_markup=menu_1)
-
-
-
-# @dp.message_handler()
-# async def sendInformation(message: types.Message):
-#     try:
-#         respond =  wikipedia.summary(message.text)
-#         await message.answer(respond)
-#     except:
-#         await message.answer("Yuborilgan sorov orqali malumot topilmadi")
-
-
-@dp.message_handler(commands=['send_image'])
-async def send_image(message: types.Message):
-    photo_url = 'https://www.freecodecamp.org/news/content/images/2021/08/chris-ried-ieic5Tq8YMk-unsplash.jpg'
-    caption = 'Sizning rasmingiz'
-    await bot.send_photo(message.chat.id, photo=photo_url, caption=caption)
+    await message.answer ("👤Abdulla Qodiriy", reply_markup=menu_1)
 
 
 #admin
